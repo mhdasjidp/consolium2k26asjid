@@ -101,7 +101,13 @@ export const Hero: React.FC = () => {
 
         {/* 3. Theme Description Paragraph */}
         <div className="hero__pitch w-full lg:col-span-2 lg:row-start-2" data-reveal>
-          <p className="hero__lede">{EVENT_CONTENT.description}</p>
+          <p className="hero__lede text-gray-400 text-lg leading-relaxed max-w-4xl">
+            Consoulium 2026: Ayatic Codex explores the divine patterns and
+            rhythmic order woven into the universe. By mindfully observing the
+            manifest signs (ayat) across creation—from delicate ecosystems to
+            majestic galaxies—we discover the clearest path to the Creator,
+            inspiring a faith built on profound certainty.
+          </p>
           <div className="hero__ctas">
             <a
               href="#tickets"

@@ -117,61 +117,12 @@ const SceneSvg: React.FC<SceneSvgProps> = ({ label, children }) => (
   </svg>
 );
 
-const WaterShimmer: React.FC<{ y: number }> = ({ y }) => (
-  <g className="sc-shimmer" opacity=".55">
-    <line x1="120" y1={y + 18} x2="540" y2={y + 18} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="34 22 14 28" />
-    <line x1="680" y1={y + 38} x2="1180" y2={y + 38} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="22 18 44 26" />
-    <line x1="260" y1={y + 62} x2="880" y2={y + 62} stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeDasharray="18 28 30 22" opacity=".7" />
-    <line x1="1040" y1={y + 56} x2="1480" y2={y + 56} stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeDasharray="28 20 12 24" opacity=".7" />
-  </g>
-);
-
-const BotanicalCluster: React.FC<{ x: number; y: number; scale?: number; flip?: number }> = ({
-  x,
-  y,
-  scale = 1,
-  flip = 1,
-}) => (
-  <g transform={`translate(${x} ${y}) scale(${scale * flip} ${scale})`}>
-    <path d="M0 0 C -6 -55 -10 -110 -4 -168" stroke="currentColor" strokeWidth="4" fill="none" strokeLinecap="round" />
-    <g transform="translate(-4 -168)">
-      <path d="M0 0 C -38 -18 -76 -4 -96 22 C -62 12 -32 8 0 0 Z" fill="currentColor" />
-      <path d="M0 0 C -48 6 -82 32 -92 64 C -58 42 -28 24 0 0 Z" fill="currentColor" opacity=".85" />
-      <path d="M0 0 C -22 -42 -4 -78 24 -96 C 12 -64 6 -32 0 0 Z" fill="currentColor" opacity=".9" />
-      <path d="M0 0 C 38 -22 78 -8 102 18 C 66 8 34 4 0 0 Z" fill="currentColor" />
-      <path d="M0 0 C 46 6 82 34 92 68 C 58 44 28 22 0 0 Z" fill="currentColor" opacity=".85" />
-    </g>
-  </g>
-);
-
-const BiologicalCell: React.FC<{ x: number; y: number; scale?: number }> = ({
-  x,
-  y,
-  scale = 1,
-}) => (
-  <g className="cheena" transform={`translate(${x} ${y}) scale(${scale})`}>
-    <line x1="0" y1="0" x2="-18" y2="-130" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" />
-    <line x1="-22" y1="0" x2="-2" y2="-130" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity=".7" />
-    <g className="cheena__arm" style={{ transformOrigin: '-10px -125px' }}>
-      <ellipse cx="52" cy="-164" rx="74" ry="42" fill="none" stroke="currentColor" strokeWidth="2.8" />
-      <ellipse cx="52" cy="-164" rx="56" ry="28" fill="none" stroke="currentColor" strokeWidth="1.4" strokeDasharray="6 5" opacity=".75" />
-      <circle cx="38" cy="-164" r="14" fill="var(--g-yellow)" opacity=".35" />
-      <circle cx="38" cy="-164" r="7" fill="currentColor" />
-      <path d="M 68 -172 C 78 -178 88 -172 94 -164 C 88 -156 78 -150 68 -156 Z" fill="none" stroke="currentColor" strokeWidth="1.6" />
-      <circle cx="82" cy="-148" r="4" fill="var(--g-green)" />
-      <circle cx="20" cy="-150" r="3.5" fill="var(--g-blue)" />
-      <path
-        d="M -10 -125 Q 20 -145 52 -122 M -10 -125 Q 15 -168 -22 -164 M 52 -164 L 126 -164 M 52 -164 L 88 -128"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        fill="none"
-        opacity=".65"
-      />
-      <circle cx="126" cy="-164" r="4.5" fill="var(--g-red)" />
-    </g>
-  </g>
-);
-
+/**
+ * Phase 1: Observation (Ayat) - 06:00
+ * Concept: The Dawn of Perception.
+ * A single, expansive, ultra-thin geometric eye paired with a continuous organic
+ * Fibonacci spiral unfurling smoothly from the bottom left.
+ */
 export const AyatDawnScene: React.FC = () => {
   const sceneRef = useRef<SVGGElement | null>(null);
 
@@ -189,63 +140,136 @@ export const AyatDawnScene: React.FC = () => {
   }, []);
 
   return (
-    <SceneSvg label="06:00 · Observation (Ayat) — biological cells, leaf venation, and food web diagrams at dawn">
+    <SceneSvg label="06:00 · Observation (Ayat) — The Dawn of Perception">
+      <defs>
+        <radialGradient id="ayat-dawn-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#10B981" stopOpacity="0.14" />
+          <stop offset="60%" stopColor="#10B981" stopOpacity="0.03" />
+          <stop offset="100%" stopColor="#10B981" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
       <g ref={sceneRef} style={{ color: 'var(--scene-ink, #1e2a3a)' }}>
-        <path
-          d="M0 540 Q 260 500 520 528 T 1040 518 T 1600 535 L 1600 600 L 0 600 Z"
-          fill="currentColor"
-          opacity=".14"
+        {/* Ambient Dawn Perception Glow */}
+        <circle
+          className="codex-breathe animate-pulse [animation-duration:15s]"
+          cx="1020"
+          cy="340"
+          r="320"
+          fill="url(#ayat-dawn-glow)"
         />
-        <g opacity=".38" stroke="currentColor" fill="none">
-          <path d="M 160 470 C 260 390 420 350 580 390 C 440 430 290 450 160 470 Z" strokeWidth="2" />
-          <path d="M 160 470 C 300 420 440 400 580 390" strokeWidth="1.6" />
-          <path d="M 280 442 L 250 408 M 360 422 L 335 380 M 440 408 L 425 372 M 320 432 L 365 442 M 410 414 L 460 422" strokeWidth="1.2" />
-          <g strokeDasharray="5 5" strokeWidth="1.4">
-            <line x1="580" y1="390" x2="740" y2="310" />
-            <line x1="740" y1="310" x2="920" y2="360" />
-            <line x1="740" y1="310" x2="860" y2="230" />
-            <line x1="580" y1="390" x2="920" y2="360" />
+
+        {/* Continuous Organic Fibonacci Spiral Unfurling from Bottom-Left */}
+        <path
+          className="codex-breathe"
+          d="M 120 660
+             C 240 520, 460 440, 720 430
+             C 940 422, 1140 380, 1160 280
+             C 1175 205, 1085 165, 995 190
+             C 925 210, 895 285, 935 345
+             C 962 385, 1020 392, 1052 360
+             C 1074 338, 1068 305, 1040 298
+             C 1022 294, 1012 310, 1020 325"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1"
+          strokeOpacity="0.2"
+          strokeLinecap="round"
+        />
+        <path
+          d="M 180 680
+             C 340 540, 610 465, 880 435
+             C 1060 415, 1210 345, 1190 245"
+          fill="none"
+          stroke="#10B981"
+          strokeWidth="0.5"
+          strokeOpacity="0.25"
+          strokeLinecap="round"
+        />
+
+        {/* Expansive Ultra-Thin Geometric Eye of Perception */}
+        <g transform="translate(1020 340)">
+          {/* Outer Eye Envelope */}
+          <path
+            d="M -420 0 C -210 -195, 210 -195, 420 0 C 210 195, -210 195, -420 0 Z"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1"
+            strokeOpacity="0.2"
+          />
+          <path
+            d="M -340 0 C -170 -135, 170 -135, 340 0 C 170 135, -170 135, -340 0 Z"
+            fill="none"
+            stroke="#10B981"
+            strokeWidth="0.5"
+            strokeOpacity="0.28"
+          />
+
+          {/* Slowly Rotating Geometric Iris Wireframe */}
+          <g className="codex-spin animate-[spin_15s_linear_infinite]">
+            <circle
+              r="132"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.5"
+              strokeOpacity="0.2"
+            />
+            <circle
+              r="88"
+              fill="none"
+              stroke="#10B981"
+              strokeWidth="1"
+              strokeOpacity="0.26"
+            />
+            <ellipse
+              rx="132"
+              ry="54"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.5"
+              strokeOpacity="0.2"
+            />
+            <ellipse
+              rx="132"
+              ry="54"
+              transform="rotate(60)"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.5"
+              strokeOpacity="0.2"
+            />
+            <ellipse
+              rx="132"
+              ry="54"
+              transform="rotate(-60)"
+              fill="none"
+              stroke="#10B981"
+              strokeWidth="0.5"
+              strokeOpacity="0.24"
+            />
           </g>
-          <circle cx="580" cy="390" r="9" fill="var(--g-green)" />
-          <circle cx="740" cy="310" r="12" fill="var(--g-yellow)" />
-          <circle cx="920" cy="360" r="10" fill="var(--g-blue)" />
-          <circle cx="860" cy="230" r="8" fill="var(--g-red)" />
+
+          {/* Minimalist Central Pupil */}
+          <circle
+            r="28"
+            fill="none"
+            stroke="#10B981"
+            strokeWidth="0.5"
+            strokeOpacity="0.35"
+          />
+          <circle r="3.5" fill="#10B981" fillOpacity="0.7" />
         </g>
-
-        <BotanicalCluster x={110} y={560} scale={0.95} />
-        <BotanicalCluster x={165} y={565} scale={0.7} flip={-1} />
-        <BotanicalCluster x={1470} y={560} scale={0.85} flip={-1} />
-
-        <path
-          d="M0 575 Q 240 555 460 572 T 980 568 T 1600 575 L 1600 615 L 0 615 Z"
-          fill="currentColor"
-          opacity=".85"
-        />
-
-        <BiologicalCell x={340} y={575} scale={1.05} />
-        <BiologicalCell x={620} y={578} scale={0.95} />
-        <BiologicalCell x={880} y={580} scale={0.82} />
-
-        <g transform="translate(1220 565)">
-          <path d="M 0 0 C -30 -55 -20 -115 20 -150 C 60 -115 70 -55 40 0 Z" fill="none" stroke="currentColor" strokeWidth="2.5" />
-          <path d="M 20 -150 L 20 0 M 20 -110 L -6 -85 M 20 -80 L 46 -55 M 20 -50 L -4 -28" stroke="currentColor" strokeWidth="1.5" />
-          <circle className="idea" cx="20" cy="-165" r="7" fill="var(--g-yellow)" />
-          <circle className="idea" cx="20" cy="-165" r="16" fill="var(--g-yellow)" opacity=".28" filter="url(#sc-soft)" />
-        </g>
-
-        <g className="birds" opacity=".75">
-          <path className="bird" d="M 480 220 q 8 -8 16 0 q 8 -8 16 0" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" />
-          <path className="bird" d="M 520 205 q 7 -7 14 0 q 7 -7 14 0" stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="round" />
-          <path className="bird" d="M 555 225 q 6 -6 12 0 q 6 -6 12 0" stroke="currentColor" strokeWidth="1.6" fill="none" strokeLinecap="round" />
-        </g>
-
-        <rect x="0" y="595" width="1600" height="105" fill="currentColor" opacity=".18" />
-        <WaterShimmer y={600} />
       </g>
     </SceneSvg>
   );
 };
 
+/**
+ * Phase 2: Contemplation (Fikr) - 12:00
+ * Concept: The Biological Code.
+ * A minimalist, continuous-line rendering of a massive, symmetric DNA double helix
+ * with glowing intersection points where the strands cross.
+ */
 export const FikrNoonScene: React.FC = () => {
   const sceneRef = useRef<SVGGElement | null>(null);
 
@@ -262,186 +286,167 @@ export const FikrNoonScene: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Crossing points along the symmetric double helix
+  const crossings = [420, 660, 900, 1140, 1380];
+  // Base-pair rung positions between crossings
+  const rungs: [number, number, number][] = [
+    [300, 240, 460],
+    [540, 240, 460],
+    [780, 240, 460],
+    [1020, 240, 460],
+    [1260, 240, 460],
+  ];
+
   return (
-    <SceneSvg label="Abstract visual representation of profound biological codes, rational harmony, and rhythmic natural order.">
+    <SceneSvg label="12:00 · Contemplation (Fikr) — The Biological Code">
       <defs>
-        <radialGradient id="fikr-aura" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#E11D48" stopOpacity="0.12" />
-          <stop offset="55%" stopColor="#64748B" stopOpacity="0.04" />
+        <radialGradient id="fikr-helix-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#E11D48" stopOpacity="0.14" />
+          <stop offset="60%" stopColor="#E11D48" stopOpacity="0.03" />
           <stop offset="100%" stopColor="#E11D48" stopOpacity="0" />
         </radialGradient>
+        <linearGradient id="helix-fade" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0%" stopColor="#E11D48" stopOpacity="0" />
+          <stop offset="22%" stopColor="#E11D48" stopOpacity="0.34" />
+          <stop offset="85%" stopColor="#E11D48" stopOpacity="0.34" />
+          <stop offset="100%" stopColor="#E11D48" stopOpacity="0" />
+        </linearGradient>
       </defs>
 
       <g ref={sceneRef} style={{ color: 'var(--scene-ink, #1e2a3a)' }}>
-        {/* Soft Ambient Contemplation Aura */}
-        <circle cx="980" cy="350" r="310" fill="url(#fikr-aura)" />
-
-        {/* Static Concentric Orbital Matrix Rings */}
-        <g className="orbital-matrix">
-          <circle
-            cx="980"
-            cy="350"
-            r="245"
-            fill="none"
-            stroke="#334155"
-            strokeWidth="1"
-            strokeOpacity="0.22"
-          />
-          <circle
-            cx="980"
-            cy="350"
-            r="182"
-            fill="none"
-            stroke="#E11D48"
-            strokeWidth="1.2"
-            strokeOpacity="0.28"
-            strokeDasharray="6 10"
-          />
-          <circle
-            cx="980"
-            cy="350"
-            r="118"
-            fill="none"
-            stroke="#334155"
-            strokeWidth="1"
-            strokeOpacity="0.26"
-          />
-          <circle
-            cx="980"
-            cy="350"
-            r="58"
-            fill="none"
-            stroke="#E11D48"
-            strokeWidth="1"
-            strokeOpacity="0.3"
-          />
-          <line
-            x1="640"
-            y1="350"
-            x2="1320"
-            y2="350"
-            stroke="#334155"
-            strokeWidth="0.8"
-            strokeOpacity="0.16"
-            strokeDasharray="4 8"
-          />
-          <line
-            x1="980"
-            y1="70"
-            x2="980"
-            y2="580"
-            stroke="#334155"
-            strokeWidth="0.8"
-            strokeOpacity="0.16"
-            strokeDasharray="4 8"
-          />
-        </g>
-
-        {/* Outer Sweeping Orbital Rings & Subtle Nodes */}
-        <g className="clock__hour" style={{ transformOrigin: '980px 350px' }}>
-          <ellipse
-            cx="980"
-            cy="350"
-            rx="390"
-            ry="116"
-            transform="rotate(-14 980 350)"
-            fill="none"
-            stroke="#334155"
-            strokeWidth="1.2"
-            strokeOpacity="0.26"
-          />
-          <ellipse
-            cx="980"
-            cy="350"
-            rx="390"
-            ry="116"
-            transform="rotate(14 980 350)"
-            fill="none"
-            stroke="#E11D48"
-            strokeWidth="1.25"
-            strokeOpacity="0.3"
-          />
-          <g transform="translate(1356 256)">
-            <circle r="9" fill="#E11D48" fillOpacity="0.18" />
-            <circle className="lit" r="3.5" fill="#E11D48" />
-          </g>
-          <g transform="translate(604 444)">
-            <circle r="9" fill="#334155" fillOpacity="0.15" />
-            <circle className="lit" r="3.2" fill="#475569" />
-          </g>
-        </g>
-
-        {/* Inner Harmonic Arabesque Ellipses & Glowing Nodes */}
-        <g className="clock__min" style={{ transformOrigin: '980px 350px' }}>
-          <ellipse
-            cx="980"
-            cy="350"
-            rx="265"
-            ry="84"
-            transform="rotate(36 980 350)"
-            fill="none"
-            stroke="#334155"
-            strokeWidth="1"
-            strokeOpacity="0.22"
-            strokeDasharray="4 6"
-          />
-          <ellipse
-            cx="980"
-            cy="350"
-            rx="265"
-            ry="84"
-            transform="rotate(-36 980 350)"
-            fill="none"
-            stroke="#E11D48"
-            strokeWidth="1"
-            strokeOpacity="0.24"
-            strokeDasharray="4 6"
-          />
-          <g transform="translate(1162 350)">
-            <circle r="8" fill="#E11D48" fillOpacity="0.18" />
-            <circle className="lit" r="3.5" fill="#E11D48" />
-          </g>
-          <g transform="translate(862 350)">
-            <circle r="7" fill="#334155" fillOpacity="0.15" />
-            <circle className="lit" r="3" fill="#475569" />
-          </g>
-          <g transform="translate(980 168)">
-            <circle r="8" fill="#E11D48" fillOpacity="0.18" />
-            <circle className="lit" r="3.2" fill="#E11D48" />
-          </g>
-        </g>
-
-        {/* Central Contemplation Core */}
-        <circle cx="980" cy="350" r="12" fill="#E11D48" fillOpacity="0.14" />
-        <circle cx="980" cy="350" r="4.5" fill="#E11D48" />
-        <circle cx="980" cy="350" r="1.8" fill="#FFFFFF" />
-
-        {/* Minimal Horizon Line & Shimmer */}
-        <line
-          x1="-10"
-          y1="598"
-          x2="1610"
-          y2="598"
-          stroke="#334155"
-          strokeWidth="1"
-          strokeOpacity="0.22"
+        <ellipse
+          className="codex-breathe animate-pulse [animation-duration:15s]"
+          cx="900"
+          cy="350"
+          rx="520"
+          ry="210"
+          fill="url(#fikr-helix-glow)"
         />
-        <WaterShimmer y={598} />
+
+        {/* Central Symmetry Axis */}
+        <line
+          x1="180"
+          y1="350"
+          x2="1500"
+          y2="350"
+          stroke="currentColor"
+          strokeWidth="0.5"
+          strokeOpacity="0.14"
+        />
+
+        {/* Harmonic Base-Pair Rungs at Crest Intervals */}
+        <g className="codex-breathe">
+          {rungs.map(([x, y1, y2]) => (
+            <g key={x}>
+              <line
+                x1={x}
+                y1={y1}
+                x2={x}
+                y2={y2}
+                stroke="currentColor"
+                strokeWidth="0.5"
+                strokeOpacity="0.18"
+              />
+              <line
+                x1={x - 48}
+                y1={y1 + 26}
+                x2={x - 48}
+                y2={y2 - 26}
+                stroke="currentColor"
+                strokeWidth="0.5"
+                strokeOpacity="0.12"
+              />
+              <line
+                x1={x + 48}
+                y1={y1 + 26}
+                x2={x + 48}
+                y2={y2 - 26}
+                stroke="currentColor"
+                strokeWidth="0.5"
+                strokeOpacity="0.12"
+              />
+            </g>
+          ))}
+        </g>
+
+        {/* Continuous Symmetric DNA Double Helix Strands */}
+        <g className="codex-breathe">
+          {/* Primary Strand A */}
+          <path
+            d="M 180 350
+               C 240 190, 360 190, 420 350
+               C 480 510, 600 510, 660 350
+               C 720 190, 840 190, 900 350
+               C 960 510, 1080 510, 1140 350
+               C 1200 190, 1320 190, 1380 350
+               C 1420 455, 1470 485, 1510 440"
+            fill="none"
+            stroke="url(#helix-fade)"
+            strokeWidth="1"
+            strokeLinecap="round"
+          />
+          <path
+            d="M 180 350
+               C 240 190, 360 190, 420 350
+               C 480 510, 600 510, 660 350
+               C 720 190, 840 190, 900 350
+               C 960 510, 1080 510, 1140 350
+               C 1200 190, 1320 190, 1380 350
+               C 1420 455, 1470 485, 1510 440"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="0.5"
+            strokeOpacity="0.22"
+            strokeLinecap="round"
+          />
+
+          {/* Complementary Strand B (Perfectly Mirrored) */}
+          <path
+            d="M 180 350
+               C 240 510, 360 510, 420 350
+               C 480 190, 600 190, 660 350
+               C 720 510, 840 510, 900 350
+               C 960 190, 1080 190, 1140 350
+               C 1200 510, 1320 510, 1380 350
+               C 1420 245, 1470 215, 1510 260"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1"
+            strokeOpacity="0.22"
+            strokeLinecap="round"
+          />
+        </g>
+
+        {/* Glowing Intersection Points Where Strands Cross */}
+        <g className="helix-nodes">
+          {crossings.map((cx) => (
+            <g key={cx} transform={`translate(${cx} 350)`}>
+              <circle
+                r="16"
+                fill="none"
+                stroke="#E11D48"
+                strokeWidth="0.5"
+                strokeOpacity="0.25"
+              />
+              <circle r="9" fill="#E11D48" fillOpacity="0.16" />
+              <circle className="lit" r="3.2" fill="#E11D48" fillOpacity="0.85" />
+            </g>
+          ))}
+        </g>
       </g>
     </SceneSvg>
   );
 };
 
 /**
- * Phase 3: Insight (Basira) — Cosmic Clockwork, Rotating Atomic Structures & Stylized Matrix
- * Replaces the original Vallam Kali (Snake Boat) animation completely while preserving
- * all ambient animation timing hooks (.cosmic-clock, .kettuvallam, .water-metro, .chundan,
- * .rower, .oar, .rower__body, .splash, .lead-spin).
+ * Phase 3: Insight (Basira) - 16:00
+ * Concept: The Cosmic Clock.
+ * Abstract celestial mechanics — an astrolabe of smooth, intersecting ellipses
+ * and concentric planetary orbits rotating slowly on a tilted axis, with a subtle
+ * glow on the primary orbital path.
  */
 export const BasiraDuskScene: React.FC = () => {
   const sceneRef = useRef<SVGGElement | null>(null);
-  const matrixX = [260, 410, 560, 710, 860, 1010, 1160, 1310];
-  const nodePalette = ['#2563EB', '#E11D48', '#F59E0B', '#10B981'];
 
   useEffect(() => {
     const node = sceneRef.current;
@@ -457,213 +462,153 @@ export const BasiraDuskScene: React.FC = () => {
   }, []);
 
   return (
-    <SceneSvg label="Dynamic scene depicting the precise, rhythmic turning of the cosmic clock and the majestic dance of atoms.">
+    <SceneSvg label="16:00 · Insight (Basira) — The Cosmic Clock">
+      <defs>
+        <radialGradient id="basira-cosmos-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#2563EB" stopOpacity="0.16" />
+          <stop offset="55%" stopColor="#6D28D9" stopOpacity="0.05" />
+          <stop offset="100%" stopColor="#2563EB" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
       <g ref={sceneRef} style={{ color: 'var(--scene-ink, #231832)' }}>
-        {/* Central Cosmic Clock & Celestial Astrolabe */}
-        <g className="cosmic-clock" transform="translate(800 295)">
-          <circle r="195" fill="none" className="sc-line sc-dash" />
-          <circle r="146" fill="none" className="sc-line sc-thin" />
-          <circle r="96" fill="none" stroke="#2563EB" strokeWidth="1.5" strokeDasharray="4 6" />
-          <ellipse rx="250" ry="82" transform="rotate(-18)" fill="none" stroke="#2563EB" strokeWidth="2.2" />
-          <ellipse rx="250" ry="82" transform="rotate(22)" fill="none" stroke="#6D28D9" strokeWidth="1.8" strokeDasharray="6 6" />
-          {Array.from({ length: 12 }, (_, idx) => {
-            const rad = (idx * 30 * Math.PI) / 180;
-            return (
-              <line
-                key={idx}
-                x1={Math.cos(rad) * 128}
-                y1={Math.sin(rad) * 128}
-                x2={Math.cos(rad) * 146}
-                y2={Math.sin(rad) * 146}
-                className="sc-line"
-              />
-            );
-          })}
-          <line x1="0" y1="0" x2="-68" y2="-82" stroke="#6D28D9" strokeWidth="3.5" strokeLinecap="round" />
-          <line x1="0" y1="0" x2="112" y2="-34" stroke="#2563EB" strokeWidth="2.5" strokeLinecap="round" />
-          <circle cx="-185" cy="54" r="10" fill="#2563EB" />
-          <circle cx="155" cy="-46" r="8" fill="#F59E0B" />
-          <circle cx="64" cy="86" r="7" fill="#10B981" />
-          <circle r="20" fill="#F59E0B" className="sc-stroke" />
-          <circle r="7" fill="#fff" />
-        </g>
+        {/* Ambient Celestial Glow */}
+        <circle
+          className="codex-breathe animate-pulse [animation-duration:15s]"
+          cx="980"
+          cy="340"
+          r="330"
+          fill="url(#basira-cosmos-glow)"
+        />
 
-        {/* Left Rotating Atomic Structure */}
-        <g transform="translate(290 325)">
-          <g className="kettuvallam">
-            {[0, 60, 120].map((deg) => (
-              <ellipse
-                key={deg}
-                rx="92"
-                ry="32"
-                transform={`rotate(${deg})`}
-                fill="none"
-                stroke="#2563EB"
-                strokeWidth="2.2"
-              />
-            ))}
-            <circle cx="80" cy="0" r="6" fill="#E11D48" />
-            <circle cx="-40" cy="69" r="6" fill="#10B981" />
-            <circle cx="-40" cy="-69" r="6" fill="#F59E0B" />
-            <circle r="15" fill="#6D28D9" className="sc-stroke" />
-            <circle r="5" fill="#fff" />
-          </g>
-        </g>
-
-        {/* Right Rotating Atomic Orbital Shell */}
-        <g transform="translate(1270 315)">
-          <g className="water-metro">
-            {[30, -30, 90].map((deg) => (
-              <ellipse
-                key={deg}
-                rx="96"
-                ry="34"
-                transform={`rotate(${deg})`}
-                fill="none"
-                className="sc-line"
-              />
-            ))}
-            <circle r="18" fill="#2563EB" className="sc-stroke" />
-            <circle r="6" fill="#F59E0B" />
-            <circle cx="82" cy="-16" r="7" fill="#E11D48" className="sc-stroke" />
-            <circle cx="-74" cy="22" r="6" fill="#10B981" className="sc-stroke" />
-          </g>
-        </g>
-
-        {/* Stylized Matrix Connecting Glowing Nodes (replaces Vallam Kali boat & rowers) */}
-        <g className="chundan">
-          <path
-            d="M260 575L410 535L560 575L710 535L860 575L1010 535L1160 575L1310 535"
+        {/* Tilted Celestial Astrolabe Assembly */}
+        <g transform="translate(980 340) rotate(-18)">
+          {/* Concentric Planetary Orbits */}
+          <circle
+            r="260"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="0.5"
+            strokeOpacity="0.18"
+          />
+          <circle
+            r="190"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="0.5"
+            strokeOpacity="0.22"
+          />
+          <circle
+            r="120"
             fill="none"
             stroke="#2563EB"
-            strokeWidth="2.2"
-            strokeDasharray="6 6"
+            strokeWidth="0.5"
+            strokeOpacity="0.28"
           />
-          <path
-            d="M260 575L560 575L860 575L1160 575M410 535L710 535L1010 535L1310 535"
+          <circle
+            r="56"
             fill="none"
-            stroke="#6D28D9"
-            strokeWidth="1.6"
-            strokeDasharray="3 6"
-            opacity="0.75"
+            stroke="currentColor"
+            strokeWidth="0.5"
+            strokeOpacity="0.22"
           />
-          {matrixX.map((x, idx) => {
-            const y = idx % 2 === 0 ? 575 : 535;
-            const color = nodePalette[idx % 4];
-            return (
-              <g key={x} className="rower">
-                <circle
-                  cx={x}
-                  cy={y}
-                  r="20"
-                  fill="none"
-                  stroke={color}
-                  strokeWidth="1.4"
-                  strokeDasharray="4 4"
-                  opacity="0.65"
-                />
-                <circle
-                  className="splash"
-                  cx={x}
-                  cy={y}
-                  r="22"
-                  fill="none"
-                  stroke={color}
-                  strokeWidth="2"
-                  opacity="0"
-                />
-                <line
-                  className="oar sc-line"
-                  data-origin={`${x} ${y}`}
-                  x1={x}
-                  y1={y}
-                  x2={x}
-                  y2={y - 22}
-                />
-                <g className="rower__body" data-origin={`${x} ${y}`}>
-                  <polygon
-                    points={`${x},${y - 10} ${x + 10},${y} ${x},${y + 10} ${x - 10},${y}`}
-                    fill={color}
-                    className="sc-stroke"
-                  />
-                  <circle cx={x} cy={y} r="3.2" fill="#fff" />
-                </g>
-              </g>
-            );
-          })}
-        </g>
 
-        <g transform="translate(1466 618)">
-          <circle cx="27" cy="27" r="33" fill="#fff" />
-          <g className="lead-spin">
-            <circle cx="27" cy="27" r="18" fill="none" stroke="#2563EB" strokeWidth="3" strokeDasharray="8 6" />
+          {/* Subtle Glow on Primary Orbital Path */}
+          <ellipse
+            rx="380"
+            ry="112"
+            fill="none"
+            stroke="#2563EB"
+            strokeWidth="4"
+            strokeOpacity="0.12"
+            filter="url(#sc-soft)"
+          />
+          <ellipse
+            rx="380"
+            ry="112"
+            fill="none"
+            stroke="#2563EB"
+            strokeWidth="1"
+            strokeOpacity="0.42"
+          />
+
+          {/* Slowly Rotating Intersecting Ellipses */}
+          <g className="codex-spin animate-[spin_15s_linear_infinite]">
+            <ellipse
+              rx="310"
+              ry="92"
+              transform="rotate(28)"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.5"
+              strokeOpacity="0.22"
+            />
+            <ellipse
+              rx="310"
+              ry="92"
+              transform="rotate(-28)"
+              fill="none"
+              stroke="#2563EB"
+              strokeWidth="0.5"
+              strokeOpacity="0.28"
+            />
+            <ellipse
+              rx="230"
+              ry="148"
+              transform="rotate(64)"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.5"
+              strokeOpacity="0.18"
+            />
+            <ellipse
+              rx="230"
+              ry="148"
+              transform="rotate(-64)"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.5"
+              strokeOpacity="0.18"
+            />
           </g>
-        </g>
 
-        <WaterShimmer y={600} />
+          {/* Minimalist Celestial Equilibrium Axis */}
+          <line
+            x1="-420"
+            y1="0"
+            x2="420"
+            y2="0"
+            stroke="currentColor"
+            strokeWidth="0.5"
+            strokeOpacity="0.15"
+          />
+          <line
+            x1="0"
+            y1="-280"
+            x2="0"
+            y2="280"
+            stroke="currentColor"
+            strokeWidth="0.5"
+            strokeOpacity="0.15"
+          />
+
+          {/* Quiet Center Singularity */}
+          <circle r="10" fill="#2563EB" fillOpacity="0.18" />
+          <circle r="3" fill="#2563EB" fillOpacity="0.85" />
+        </g>
       </g>
     </SceneSvg>
   );
 };
 
-interface EllipticalGalaxyClusterProps {
-  x: number;
-}
-
-const EllipticalGalaxyCluster: React.FC<EllipticalGalaxyClusterProps> = ({ x }) => {
-  const starColors = ['#2563EB', '#E11D48', '#F59E0B', '#10B981'];
-  return (
-    <g className="sts" data-x={x}>
-      <ellipse
-        cx={x + 55}
-        cy="240"
-        rx="84"
-        ry="28"
-        transform={`rotate(-18 ${x + 55} 240)`}
-        fill="none"
-        stroke="#6D28D9"
-        strokeWidth="2"
-      />
-      <ellipse
-        cx={x + 55}
-        cy="240"
-        rx="52"
-        ry="18"
-        transform={`rotate(22 ${x + 55} 240)`}
-        fill="none"
-        className="sc-line sc-dash"
-      />
-      <circle cx={x + 55} cy="240" r="36" fill="none" className="sc-line sc-thin" />
-      <circle className="sts__beacon" cx={x + 55} cy="240" r="7" fill="#F59E0B" />
-      <g className="sts__trolley">
-        <circle cx={x - 60} cy="294" r="5" fill="#2563EB" />
-        <line
-          className="sts__cable sc-line sc-thin"
-          x1={x - 60}
-          y1="300"
-          x2={x - 60}
-          y2="430"
-          strokeDasharray="3 5"
-        />
-        <g className="sts__box">
-          <circle
-            cx={x - 60}
-            cy="440"
-            r="10"
-            fill="#fff"
-            stroke={starColors[x % 4]}
-            strokeWidth="2.5"
-          />
-          <circle cx={x - 60} cy="440" r="4" fill={starColors[x % 4]} />
-        </g>
-      </g>
-    </g>
-  );
-};
-
+/**
+ * Phase 4: Zenith (Marifa) - 20:00
+ * Concept: The Boundless Matrix.
+ * A pristine, deep-space aesthetic featuring a vast, subtle celestial grid and
+ * a delicate constellation web connecting a few sparse, softly glowing stellar nodes.
+ */
 export const MarifaNightScene: React.FC = () => {
   const sceneRef = useRef<SVGGElement | null>(null);
-  const starColors = ['#2563EB', '#E11D48', '#F59E0B', '#10B981'];
 
   useEffect(() => {
     const node = sceneRef.current;
@@ -678,99 +623,106 @@ export const MarifaNightScene: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Sparse, thoughtfully placed stellar nodes across the deep-space matrix
+  const stellarNodes: [number, number, string, number][] = [
+    [520, 250, '#F59E0B', 2.8],
+    [710, 175, '#F8FAFC', 2.2],
+    [860, 295, '#6D28D9', 3.0],
+    [1040, 195, '#F59E0B', 3.4],
+    [1190, 330, '#F8FAFC', 2.4],
+    [960, 445, '#2563EB', 2.6],
+    [1360, 225, '#F59E0B', 2.8],
+    [1440, 390, '#F8FAFC', 2.2],
+  ];
+
   return (
-    <SceneSvg label="A breathtaking starlit expanse showing galaxies, superclusters, and the boundless craftsmanship of the universe.">
+    <SceneSvg label="20:00 · Zenith (Marifa) — The Boundless Matrix">
+      <defs>
+        <radialGradient id="marifa-zenith-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#F59E0B" stopOpacity="0.12" />
+          <stop offset="55%" stopColor="#6D28D9" stopOpacity="0.06" />
+          <stop offset="100%" stopColor="#03050C" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
       <g ref={sceneRef} style={{ color: 'var(--scene-ink, #d8e2f0)' }}>
-        <path
-          d="M90 220L190 160L310 210L420 150L550 240M190 160L240 290L310 210M640 180L760 130L880 190L990 140L1080 230M760 130L810 260L880 190M1160 190L1280 135L1410 185L1510 125"
-          className="sc-line sc-thin"
-          strokeDasharray="3 5"
+        {/* Deep-Space Zenith Glow */}
+        <circle
+          className="codex-breathe animate-pulse [animation-duration:15s]"
+          cx="1040"
+          cy="300"
+          r="360"
+          fill="url(#marifa-zenith-glow)"
         />
-        {[
-          [90, 220],
-          [190, 160],
-          [310, 210],
-          [420, 150],
-          [550, 240],
-          [240, 290],
-          [640, 180],
-          [760, 130],
-          [880, 190],
-          [990, 140],
-          [1080, 230],
-          [810, 260],
-          [1160, 190],
-          [1280, 135],
-          [1410, 185],
-          [1510, 125],
-        ].map(([cx, cy], idx) => (
-          <g key={idx} transform={`translate(${cx} ${cy})`}>
-            <circle r="8" fill="#F59E0B" fillOpacity="0.2" />
-            <circle className="lit" r="3.5" fill={starColors[idx % 4]} />
-          </g>
-        ))}
 
-        <circle className="sts__beacon" cx="480" cy="340" r="8" fill="#F59E0B" />
-        <g className="rainbow" transform="translate(480 340)">
-          <ellipse rx="190" ry="68" transform="rotate(-18)" fill="none" stroke="#6D28D9" strokeWidth="4" />
-          <ellipse rx="125" ry="44" transform="rotate(-18)" fill="none" className="sc-line sc-dash" />
-          <ellipse rx="64" ry="22" transform="rotate(-18)" fill="none" className="sc-line sc-thin" />
+        {/* Vast, Subtle Deep-Space Coordinate Matrix Grid */}
+        <g stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.12" fill="none">
+          {/* Smooth Curved Celestial Latitudes */}
+          <path d="M 160 190 Q 880 130 1520 210" />
+          <path d="M 120 320 Q 880 260 1540 340" />
+          <path d="M 80 460 Q 880 400 1560 480" />
+          <path d="M 40 590 Q 880 540 1580 600" />
+          {/* Converging Celestial Longitudes */}
+          <line x1="480" y1="110" x2="360" y2="610" />
+          <line x1="760" y1="95" x2="700" y2="610" />
+          <line x1="1040" y1="95" x2="1040" y2="610" />
+          <line x1="1320" y1="110" x2="1400" y2="610" />
         </g>
 
-        <g className="stack">
-          {Array.from({ length: 3 }, (_, row) =>
-            Array.from({ length: 5 }, (_, col) => (
-              <rect
-                key={`${row}-${col}`}
-                x={880 + col * 32}
-                y={490 - row * 24}
-                width="14"
-                height="14"
-                rx="7"
-                fill={starColors[(row + col * 3) % 4]}
-                className="sc-stroke"
-              />
-            ))
-          )}
-        </g>
-
-        <EllipticalGalaxyCluster x={1120} />
-        <EllipticalGalaxyCluster x={1380} />
-
-        <g className="ship">
-          <ellipse
-            cx="1280"
-            cy="575"
-            rx="220"
-            ry="34"
-            fill="#6D28D9"
-            fillOpacity="0.16"
-            stroke="#6D28D9"
-            strokeWidth="2.2"
-            strokeDasharray="8 6"
-          />
-          <ellipse
-            cx="1280"
-            cy="575"
-            rx="140"
-            ry="18"
-            fill="none"
-            stroke="#F59E0B"
-            strokeWidth="2"
-            strokeDasharray="4 6"
-          />
-          {[1120, 1200, 1280, 1360, 1440].map((cx, idx) => (
+        {/* Slowly Rotating Zenith Horizon Ring */}
+        <g transform="translate(1040 295)">
+          <g className="codex-spin animate-[spin_15s_linear_infinite]">
             <circle
-              key={cx}
-              cx={cx}
-              cy={575 + (idx % 2 ? -6 : 6)}
-              r="4.5"
-              fill={starColors[idx % 4]}
+              r="210"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.5"
+              strokeOpacity="0.16"
             />
+            <ellipse
+              rx="210"
+              ry="68"
+              transform="rotate(-15)"
+              fill="none"
+              stroke="#F59E0B"
+              strokeWidth="0.5"
+              strokeOpacity="0.24"
+            />
+          </g>
+        </g>
+
+        {/* Delicate Continuous Constellation Web */}
+        <g className="codex-breathe" fill="none">
+          <path
+            d="M 520 250 L 710 175 L 860 295 L 1040 195 L 1190 330 L 1360 225 L 1440 390"
+            stroke="currentColor"
+            strokeWidth="0.5"
+            strokeOpacity="0.24"
+          />
+          <path
+            d="M 710 175 L 1040 195 L 1360 225 M 860 295 L 960 445 L 1190 330"
+            stroke="#F59E0B"
+            strokeWidth="0.5"
+            strokeOpacity="0.2"
+          />
+        </g>
+
+        {/* Sparse, Softly Glowing Stellar Nodes */}
+        <g className="stellar-nodes">
+          {stellarNodes.map(([cx, cy, color, r], idx) => (
+            <g key={idx} transform={`translate(${cx} ${cy})`}>
+              <circle
+                r={r * 4.5}
+                fill="none"
+                stroke={color}
+                strokeWidth="0.5"
+                strokeOpacity="0.22"
+              />
+              <circle r={r * 2.5} fill={color} fillOpacity="0.14" />
+              <circle className="lit" r={r} fill={color} fillOpacity="0.9" />
+            </g>
           ))}
         </g>
-
-        <WaterShimmer y={585} />
       </g>
     </SceneSvg>
   );
@@ -781,7 +733,29 @@ export const MarifaNightScene: React.FC = () => {
  * Replaces the original dark Kochi nighttime skyline (lighthouse, bridge, cranes, and buildings)
  * while maintaining identical dimensions (viewBox="0 0 1600 220") and responsive classes (.night__skyline).
  */
+const CODEX_PARTICLES = Array.from({ length: 36 }, (_, idx) => {
+  const seed = (idx * 9301 + 49297) % 233280;
+  const n1 = seed / 233280;
+  const n2 = ((seed * 7 + 131) % 233280) / 233280;
+  const n3 = ((seed * 13 + 7919) % 233280) / 233280;
+  return {
+    id: idx,
+    bx: Math.round(45 + ((idx + 0.35) / 36) * 1510 + (n1 - 0.5) * 28),
+    by: Math.round(18 + n2 * 168),
+    r: Number((1.1 + (idx % 4) * 0.45).toFixed(2)),
+    depth: Number((0.4 + n3 * 0.95).toFixed(2)),
+    phase: Number((idx * 0.85).toFixed(2)),
+    speed: Number((0.45 + (idx % 5) * 0.16).toFixed(2)),
+    colorIdx: idx % 5,
+  };
+});
+
 export const NightSkyline: React.FC = () => {
+  const svgRef = useRef<SVGSVGElement | null>(null);
+  const particleRefs = useRef<(SVGGElement | null)[]>([]);
+  const linksRef = useRef<SVGPathElement | null>(null);
+  const auraRef = useRef<SVGCircleElement | null>(null);
+
   const starField: [number, number, number][] = [
     [72, 48, 1.1],
     [138, 118, 0.8],
@@ -806,8 +780,144 @@ export const NightSkyline: React.FC = () => {
   ];
   const palette = ['#2563EB', '#E11D48', '#F59E0B', '#10B981', '#6D28D9'];
 
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg || typeof window === 'undefined') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let rafId = 0;
+    let inView = true;
+    const pointer = {
+      tx: 0,
+      ty: 0,
+      cx: 0,
+      cy: 0,
+      svgX: 800,
+      svgY: 110,
+      curSvgX: 800,
+      curSvgY: 110,
+      active: false,
+    };
+
+    const onPointerMove = (e: PointerEvent) => {
+      const vw = Math.max(1, window.innerWidth);
+      const vh = Math.max(1, window.innerHeight);
+      pointer.tx = (e.clientX / vw - 0.5) * 2;
+      pointer.ty = (e.clientY / vh - 0.5) * 2;
+      pointer.svgX = (e.clientX / vw) * 1600;
+      const rect = svg.getBoundingClientRect();
+      if (rect.height > 0) {
+        const relY = (e.clientY - rect.top) / rect.height;
+        pointer.svgY = Math.max(-60, Math.min(280, relY * 220));
+      } else {
+        pointer.svgY = (e.clientY / vh) * 220;
+      }
+      pointer.active = true;
+    };
+
+    const tick = (now: number) => {
+      const t = now * 0.001;
+      pointer.cx += (pointer.tx - pointer.cx) * 0.075;
+      pointer.cy += (pointer.ty - pointer.cy) * 0.075;
+      pointer.curSvgX += (pointer.svgX - pointer.curSvgX) * 0.09;
+      pointer.curSvgY += (pointer.svgY - pointer.curSvgY) * 0.09;
+
+      const coords: [number, number][] = [];
+      let linkPath = '';
+
+      for (let i = 0; i < CODEX_PARTICLES.length; i++) {
+        const p = CODEX_PARTICLES[i];
+        const node = particleRefs.current[i];
+        const driftX = Math.cos(t * p.speed + p.phase) * (4.5 * p.depth);
+        const driftY = Math.sin(t * (p.speed * 0.85) + p.phase) * (3.2 * p.depth);
+        const parallaxX = pointer.cx * 26 * p.depth;
+        const parallaxY = pointer.cy * 12 * p.depth;
+
+        let x = p.bx + driftX + parallaxX;
+        let y = p.by + driftY + parallaxY;
+        let scale = 1;
+
+        if (pointer.active) {
+          const dx = x - pointer.curSvgX;
+          const dy = y - pointer.curSvgY;
+          const dist = Math.hypot(dx, dy);
+          const radius = 210;
+          if (dist < radius && dist > 0.01) {
+            const force = (1 - dist / radius) * 18 * p.depth;
+            const angle = Math.atan2(dy, dx) + 0.35 * (1 - dist / radius);
+            x += Math.cos(angle) * force;
+            y += Math.sin(angle) * force;
+            scale = 1 + (1 - dist / radius) * 0.55;
+          }
+        }
+
+        coords.push([x, y]);
+        if (node) {
+          node.setAttribute(
+            'transform',
+            `translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${scale.toFixed(2)})`
+          );
+        }
+      }
+
+      if (pointer.active) {
+        for (let i = 0; i < coords.length; i++) {
+          const [x1, y1] = coords[i];
+          const dCursor = Math.hypot(x1 - pointer.curSvgX, y1 - pointer.curSvgY);
+          if (dCursor < 220) {
+            for (let j = i + 1; j < coords.length; j++) {
+              const [x2, y2] = coords[j];
+              const dPair = Math.hypot(x1 - x2, y1 - y2);
+              if (dPair < 135) {
+                linkPath += `M${x1.toFixed(1)},${y1.toFixed(1)}L${x2.toFixed(1)},${y2.toFixed(1)}`;
+              }
+            }
+          }
+        }
+      }
+
+      if (linksRef.current) {
+        linksRef.current.setAttribute('d', linkPath);
+      }
+      if (auraRef.current) {
+        auraRef.current.setAttribute('cx', pointer.curSvgX.toFixed(1));
+        auraRef.current.setAttribute('cy', pointer.curSvgY.toFixed(1));
+        auraRef.current.setAttribute('opacity', pointer.active ? '0.65' : '0');
+      }
+
+      if (inView) {
+        rafId = window.requestAnimationFrame(tick);
+      }
+    };
+
+    const observer =
+      typeof IntersectionObserver !== 'undefined'
+        ? new IntersectionObserver(
+            ([entry]) => {
+              inView = entry.isIntersecting;
+              window.cancelAnimationFrame(rafId);
+              if (inView) {
+                rafId = window.requestAnimationFrame(tick);
+              }
+            },
+            { threshold: 0.01 }
+          )
+        : null;
+
+    observer?.observe(svg);
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
+    rafId = window.requestAnimationFrame(tick);
+
+    return () => {
+      window.cancelAnimationFrame(rafId);
+      observer?.disconnect();
+      window.removeEventListener('pointermove', onPointerMove);
+    };
+  }, []);
+
   return (
     <svg
+      ref={svgRef}
       className="night__skyline"
       viewBox="0 0 1600 220"
       preserveAspectRatio="xMidYMax slice"
@@ -824,6 +934,11 @@ export const NightSkyline: React.FC = () => {
           <stop offset="55%" stopColor="#10B981" stopOpacity="0.14" />
           <stop offset="100%" stopColor="#03050C" stopOpacity="0" />
         </radialGradient>
+        <radialGradient id="codex-cursor-aura" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#60A5FA" stopOpacity="0.28" />
+          <stop offset="55%" stopColor="#6D28D9" stopOpacity="0.1" />
+          <stop offset="100%" stopColor="#03050C" stopOpacity="0" />
+        </radialGradient>
         <linearGradient id="beam" x1="0" x2="1" y1="0" y2="0">
           <stop offset="0" stopColor="#60A5FA" stopOpacity="0.38" />
           <stop offset="0.5" stopColor="#C084FC" stopOpacity="0.18" />
@@ -833,6 +948,14 @@ export const NightSkyline: React.FC = () => {
 
       <ellipse cx="280" cy="112" rx="260" ry="88" fill="url(#marifa-nebula-l)" />
       <ellipse cx="1310" cy="104" rx="270" ry="92" fill="url(#marifa-nebula-r)" />
+      <circle
+        ref={auraRef}
+        cx="800"
+        cy="110"
+        r="165"
+        fill="url(#codex-cursor-aura)"
+        opacity="0"
+      />
 
       <path
         className="night__beam"
@@ -846,6 +969,40 @@ export const NightSkyline: React.FC = () => {
         <path d="M72 48L138 118L214 66L292 148L364 54L432 126M214 66L364 54" />
         <path d="M518 42L588 96L662 158L736 52L812 134L886 44L954 116L1032 62M588 96L736 52L886 44" />
         <path d="M1108 152L1184 48L1262 124L1344 58L1422 142L1506 64M1184 48L1344 58L1506 64" />
+      </g>
+
+      {/* Interactive Ayatic Codex Particle System & Dynamic Constellation Filaments */}
+      <path
+        ref={linksRef}
+        className="night__codex-links"
+        d=""
+        fill="none"
+        stroke="#60A5FA"
+        strokeWidth="0.9"
+        strokeDasharray="3 4"
+        opacity="0.42"
+      />
+      <g className="night__particles">
+        {CODEX_PARTICLES.map((p, idx) => (
+          <g
+            key={p.id}
+            ref={(el) => {
+              particleRefs.current[idx] = el;
+            }}
+            transform={`translate(${p.bx} ${p.by})`}
+          >
+            <circle
+              r={p.r * 3.1}
+              fill={palette[p.colorIdx]}
+              opacity="0.2"
+            />
+            <circle
+              r={p.r}
+              fill={idx % 3 === 0 ? '#F8FAFC' : palette[p.colorIdx]}
+              opacity="0.88"
+            />
+          </g>
+        ))}
       </g>
 
       {/* Left Abstract Spiral Galaxy */}

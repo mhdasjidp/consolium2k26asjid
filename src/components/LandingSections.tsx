@@ -50,49 +50,36 @@ export const Countdown: React.FC<{ target?: string }> = ({
   );
 };
 
-export const THOUGHT_EXAMPLES = [
-  'A deep reflection on the precise, rhythmic turning of the cosmic clock.',
-  'Contemplating the delicate internal anatomies of living ecosystems.',
-  'Tracing the rational harmony woven across galaxies and superclusters.',
-  'Observing the manifest signs of creation in the awakening of dawn.',
-  'Decoding the profound biological codes of the natural order.',
-] as const;
-
-export const STORY_YEARS = [
+export const CONSOULIUM_TEAMS = [
   {
-    year: '2022',
-    where: 'CONSOULIUM CAMPUS',
-    line: 'Exploring the signs of creation and awakening mindful reflection.',
-    kind: 'think',
-    color: TEAM_COLORS['team-blue'].hex,
+    name: 'LA-COSMIX',
+    overline: 'Nizam',
+    colorClass: 'text-[#6D28D9]',
+    description: 'Cosmic order, discipline, and absolute balance.',
   },
   {
-    year: '2023',
-    where: 'CONSOULIUM CAMPUS',
-    line: 'Deepening the intellect through scholarly dialogues and collective contemplation.',
-    kind: 'build',
-    color: TEAM_COLORS['team-green'].hex,
+    name: 'AL-COGNIX',
+    overline: 'Tafakkur',
+    colorClass: 'text-[#E11D48]',
+    description: 'Deep contemplation and the fire of the thinking mind.',
   },
   {
-    year: '2024',
-    where: 'CONSOULIUM CAMPUS',
-    line: 'Uniting seekers of knowledge in pursuit of rational harmony and spiritual insight.',
-    kind: 'ship',
-    color: TEAM_COLORS['team-yellow'].hex,
+    name: 'EL-CLARIX',
+    overline: 'Basira',
+    colorClass: 'text-[#2563EB]',
+    description: 'Inner vision, absolute clarity, and unwavering focus.',
   },
   {
-    year: '2025',
-    where: 'CONSOULIUM CAMPUS',
-    line: 'Expanding horizons of wisdom, artistic expression, and cosmic contemplation.',
-    kind: 'scale',
-    color: TEAM_COLORS['team-red'].hex,
+    name: 'LO-GLIFIX',
+    overline: 'Ayat',
+    colorClass: 'text-[#10B981]',
+    description: "Reading creation's signs and discerning profound truths.",
   },
   {
-    year: '2026',
-    where: 'CONSOULIUM CAMPUS',
-    line: 'The 5th edition. Ayatic Codex.',
-    kind: 'now',
-    color: TEAM_COLORS['team-purple'].hex,
+    name: 'DER-ZENIX',
+    overline: 'Marifa',
+    colorClass: 'text-[#F59E0B]',
+    description: 'Deep spiritual knowledge and the summit of realization.',
   },
 ] as const;
 
@@ -132,7 +119,7 @@ export const StoryAndTimelineSection: React.FC = () => {
       aria-labelledby="race-title"
     >
       <header className="race__head">
-        <span className="eyebrow">Our story · 2022 → 2026</span>
+        <span className="eyebrow">Our story · 2026</span>
         <h2 id="race-title" className="race__title">
           A legacy of intellect, reflection, and spiritual realization.
         </h2>
@@ -152,22 +139,33 @@ export const StoryAndTimelineSection: React.FC = () => {
           </span>
         </div>
 
-        <ol className="race__years">
-          {STORY_YEARS.map((item) => (
-            <li
-              key={item.year}
-              className={`race__year ${
-                item.kind === 'now' ? 'race__year--now' : ''
-              }`}
-              style={{ '--c': item.color } as React.CSSProperties}
-            >
-              <span className="race__buoy" aria-hidden="true" />
-              <span className="race__yr">{item.year}</span>
-              <span className="race__where eyebrow">{item.where}</span>
-              <span className="race__line">{item.line}</span>
-            </li>
-          ))}
-        </ol>
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+          <div
+            className="race__year race__year--now is-passed lg:col-span-1"
+            style={{ '--c': TEAM_COLORS['team-purple'].hex } as React.CSSProperties}
+          >
+            <span className="race__buoy" aria-hidden="true" />
+            <span className="race__yr">2026</span>
+            <span className="race__where eyebrow">CONSOULIUM CAMPUS</span>
+            <span className="race__line">The 5th edition. Ayatic Codex.</span>
+          </div>
+
+          <div className="lg:col-span-3 grid grid-cols-2 lg:grid-cols-5 gap-6 pt-[22px]">
+            {CONSOULIUM_TEAMS.map((team) => (
+              <div key={team.name} className="flex flex-col gap-1.5">
+                <span className="text-xs uppercase tracking-widest opacity-70">
+                  {team.overline}
+                </span>
+                <h3 className={`text-2xl font-bold ${team.colorClass}`}>
+                  {team.name}
+                </h3>
+                <p className="text-sm text-gray-400">
+                  {team.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       <ul className="race__stats grid grid-cols-2 lg:grid-cols-4">
@@ -196,77 +194,6 @@ export const StoryAndTimelineSection: React.FC = () => {
           </li>
         ))}
       </ul>
-    </section>
-  );
-};
-
-export const InteractiveTerminalSection: React.FC = () => {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const [input, setInput] = useState('');
-  const [passText, setPassText] = useState<string>(THOUGHT_EXAMPLES[0]);
-  const [isExample, setIsExample] = useState(true);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const nextText = input.trim() || THOUGHT_EXAMPLES[0];
-    setPassText(nextText);
-    setIsExample(!input.trim());
-  };
-
-  return (
-    <section
-      className="thought"
-      id="thought"
-      ref={sectionRef}
-      aria-labelledby="thought-title"
-    >
-      <div className="thought__intro">
-        <span className="eyebrow">Your turn</span>
-        <h2 id="thought-title" className="thought__title">
-          What will you discover through mindful observation?
-        </h2>
-        <p className="thought__lede">
-          Observe a sign and watch it unfold through Tafakkur, Basira, and
-          Marifa. Keep the pass, and bring your insights along. Nothing you type
-          leaves this page.
-        </p>
-
-        <form className="thought__form" onSubmit={handleSubmit}>
-          <label htmlFor="thought-input" className="sr-only">
-            Your idea
-          </label>
-          <input
-            id="thought-input"
-            className="thought__input"
-            type="text"
-            maxLength={90}
-            autoComplete="off"
-            value={input}
-            placeholder={THOUGHT_EXAMPLES[0]}
-            onChange={(e) => setInput(e.target.value)}
-          />
-          <button className="btn thought__go" type="submit">
-            Launch idea <span className="btn__arrow">→</span>
-          </button>
-        </form>
-      </div>
-
-      <div className="thought__pass">
-        <article className="pass" aria-label="Your boarding pass">
-          <span className="pass__sheen" aria-hidden="true" />
-          <div className="pass__main">
-            <header className="pass__top">
-              <span className="pass__wordmark">Consoulium 2k26</span>
-              <span className="pass__kicker">
-                Boarding pass
-                {isExample ? <b className="pass__example">Example</b> : null}
-              </span>
-            </header>
-            <span className="pass__label">Your thought</span>
-            <p className="pass__thought">“{passText}”</p>
-          </div>
-        </article>
-      </div>
     </section>
   );
 };
