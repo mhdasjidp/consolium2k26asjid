@@ -3,7 +3,7 @@ import { TEAM_COLORS } from '../theme';
 
 const pad2 = (n: number) => String(n).padStart(2, '0');
 
-function computeCountdown(targetDate = '2026-11-26T00:00:00') {
+function computeCountdown(targetDate = '2026-11-26T09:00:00') {
   const diff = Math.max(0, new Date(targetDate).getTime() - Date.now());
   const days = Math.floor(diff / 86400000);
   const hours = Math.floor((diff % 86400000) / 3600000);
@@ -13,7 +13,7 @@ function computeCountdown(targetDate = '2026-11-26T00:00:00') {
 }
 
 export const Countdown: React.FC<{ target?: string }> = ({
-  target = '2026-11-26T00:00:00',
+  target = '2026-11-26T09:00:00',
 }) => {
   const [timeLeft, setTimeLeft] = useState(() => computeCountdown(target));
 
@@ -260,7 +260,7 @@ export const CtaCountdownSection: React.FC = () => {
         </a>
 
         <div className="register__count">
-          <Countdown target="2026-11-26T00:00:00" />
+          <Countdown target="2026-11-26T09:00:00" />
           <span className="register__via">
             Nov 26, 27, 28, 29 • Bukhari Da&apos;wa College
           </span>
@@ -268,8 +268,16 @@ export const CtaCountdownSection: React.FC = () => {
       </div>
 
       <dl className="register__facts">
+        <div className="register__fact register__fact--date">
+          <dt className="eyebrow">Date</dt>
+          <dd>
+            26 – 29 Nov 2026
+            <span>9:00 AM to 6:00 PM IST</span>
+          </dd>
+        </div>
+
         <div className="register__fact register__fact--venue">
-          <dt>Venue</dt>
+          <dt className="eyebrow">Venue</dt>
           <dd>
             <a
               className="register__venue"

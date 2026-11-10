@@ -218,6 +218,32 @@ export const Navbar: React.FC = () => {
                 })}
               </ol>
             </nav>
+
+            <aside className="menu__aside">
+              <div className="menu__event" data-menu-fade>
+                <span className="eyebrow">
+                  {(() => {
+                    const diff = Math.max(
+                      0,
+                      new Date('2026-11-26T09:00:00').getTime() - Date.now()
+                    );
+                    const days = Math.floor(diff / 86400000);
+                    return diff === 0
+                      ? 'It’s happening today'
+                      : `${days} ${days === 1 ? 'day' : 'days'} to go`;
+                  })()}
+                </span>
+                <strong className="menu__date">26 – 29 Nov 2026</strong>
+                <a
+                  className="menu__venue"
+                  href="https://www.google.com/maps"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Consoulium Campus <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </aside>
           </div>
         </div>
       </div>

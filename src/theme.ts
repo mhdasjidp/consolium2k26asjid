@@ -75,6 +75,14 @@ export const NAV_LINKS = [
   { id: 'register', num: '08', label: 'brochure', href: '#register', to: '/#register', section: true },
 ] as const;
 
+export const PRELOADER_PHRASES = [
+  'Observing the manifest signs...',
+  'Decoding the cosmic codes...',
+  'Aligning the rhythmic order...',
+  'Contemplating the delicate balance...',
+  'Unveiling the Ayatic Codex...',
+] as const;
+
 export const EVENT_CONTENT = {
   brand: 'Consoulium 2k26',
   headline: 'Ayatic Codex',
